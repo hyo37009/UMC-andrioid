@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">flo clone</string>
+    <string name="home">홈</string>
+    <string name="discover">둘러보기</string>
+    <string name="search">검색</string>
+    <string name="locker">보관함</string>
+
 </resources>

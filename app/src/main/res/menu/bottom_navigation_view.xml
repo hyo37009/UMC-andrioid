@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_bottom_home_no_select"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/action_browse"
+        android:icon="@drawable/ic_bottom_look_no_select"
+        android:title="@string/discover" />
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_bottom_search_no_select"
+        android:title="@string/search" />
+
+    <item
+        android:id="@+id/action_locker"
+        android:icon="@drawable/ic_bottom_locker_no_select"
+        android:title="@string/locker" />
+</menu>
