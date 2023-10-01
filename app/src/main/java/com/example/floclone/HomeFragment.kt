@@ -33,8 +33,7 @@ class HomeFragment : Fragment() {
         binding.todayAlbumImage3.setImageDrawable(ContextCompat.getDrawable((context as MainActivity),yaritaikoto.coverImageResource))
 
 
-        var nowSong = asobo
-        changeNowSongStatus(nowSong) // 초깃값 전달
+        var nowSong:Song = (activity as MainActivity).nowSong ?: asobo
 
         binding.todayAlbumImage1.setOnClickListener {
             nowSong = asobo
@@ -45,11 +44,13 @@ class HomeFragment : Fragment() {
         binding.todayAlbumImage2.setOnClickListener {
             nowSong = augustIsMyName
             changeNowSongStatus(nowSong)
+            startSongFragment()
         }
 
         binding.todayAlbumImage3.setOnClickListener {
             nowSong = yaritaikoto
             changeNowSongStatus(nowSong)
+            startSongFragment()
         }
 
         return binding.root
@@ -59,7 +60,7 @@ class HomeFragment : Fragment() {
         val fragment:Fragment = SongFragment()
         val transaction = (activity as MainActivity).supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frameLayout, fragment)
-        transaction.commit()
+            .commit()
     }
 
     private fun changeNowSongStatus(nowSong: Song) {

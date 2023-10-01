@@ -11,7 +11,7 @@ import com.example.floclone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    lateinit var nowSong:Song
+    var nowSong:Song ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -30,8 +30,13 @@ class MainActivity : AppCompatActivity() {
 
     fun changeMiniPlayerInfo(song: Song) {
         nowSong = song
-        binding.miniPlayerSongNameTextView.text = nowSong.title
-        binding.miniPlayerArtistNameTextView.text = nowSong.artist
+        binding.miniPlayerSongNameTextView.text = nowSong?.title
+        binding.miniPlayerArtistNameTextView.text = nowSong?.artist
+    }
+
+    fun returnNowSong() : Song{
+        nowSong = this.nowSong ?: Song("null", "null", R.drawable.img_album_exp)
+        return nowSong as Song
     }
 
 
