@@ -11,9 +11,5 @@ class SongActivity : AppCompatActivity() {
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
         super.onCreate(savedInstanceState)
-
-        binding.songNameTextView.text = intent.getStringExtra("title")
-        binding.artistTextView.text = intent.getStringExtra("artist")
-        binding.imageView.setImageDrawable(getDrawable(intent.getIntExtra("cover", 0)))
     }
 }
