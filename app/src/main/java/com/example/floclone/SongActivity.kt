@@ -11,5 +11,9 @@ class SongActivity : AppCompatActivity() {
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
         super.onCreate(savedInstanceState)
+
+        binding.finishImageButton.setOnClickListener {
+            finish()
+        }
     }
 }

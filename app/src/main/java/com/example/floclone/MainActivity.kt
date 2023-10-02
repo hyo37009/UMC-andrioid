@@ -1,9 +1,6 @@
 package com.example.floclone
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.content.SharedPreferences.Editor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +8,7 @@ import com.example.floclone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    var nowSong:Song ?= null
+    var nowSongDataClass:SongDataClass ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -19,6 +16,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         initFragment()
+
+        binding.miniPlayerContainer.setOnClickListener {
+            startSongActivity()
+        }
+
+    }
+
+    private fun startSongActivity() {
+        val intent = Intent(this, SongActivity::class.java)
+
+        startActivity(intent)
     }
 
     private fun initFragment() {
@@ -28,15 +36,15 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    fun changeMiniPlayerInfo(song: Song) {
-        nowSong = song
-        binding.miniPlayerSongNameTextView.text = nowSong?.title
-        binding.miniPlayerArtistNameTextView.text = nowSong?.artist
+    fun changeMiniPlayerInfo(songDataClass: SongDataClass) {
+        nowSongDataClass = songDataClass
+        binding.miniPlayerSongNameTextView.text = nowSongDataClass?.title
+        binding.miniPlayerArtistNameTextView.text = nowSongDataClass?.artist
     }
 
-    fun returnNowSong() : Song{
-        nowSong = this.nowSong ?: Song("null", "null", R.drawable.img_album_exp)
-        return nowSong as Song
+    fun returnNowSong() : SongDataClass{
+        nowSongDataClass = this.nowSongDataClass ?: SongDataClass("null", "null", R.drawable.img_album_exp)
+        return nowSongDataClass as SongDataClass
     }
 
 
