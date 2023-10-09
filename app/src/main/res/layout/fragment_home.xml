@@ -74,6 +74,8 @@
             android:src="@drawable/img_album_exp"
             app:layout_constraintStart_toStartOf="@+id/albumImageView1"
             app:layout_constraintTop_toBottomOf="@+id/albumImageView1" />
+
+
         <!--최상위 배너 끝-->
         <TextView
             android:id="@+id/todayReleaseTextView"
@@ -180,17 +182,30 @@
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="@+id/todayAlbumTitle3"
             app:layout_constraintTop_toBottomOf="@+id/todayAlbumTitle3" />
+
         <!-- 여기는 광고 배너-->
-        <ImageView
-            android:id="@+id/adBanner"
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/homeBannerViewPager"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/img_home_viewpager_exp"
+            android:layout_height="100dp"
+            app:layout_constraintTop_toBottomOf="@+id/todayAlbumArtist1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/todayAlbumArtist1" />
+            tools:background="#A17171"
+            />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/adBanner"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:src="@drawable/img_home_viewpager_exp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/todayAlbumArtist1" />-->
+
         <!--        여기부터 매일 들어도 좋은 팟캐스트-->
+
         <TextView
             android:id="@+id/todayPodcastTextView"
             android:layout_width="wrap_content"
@@ -202,7 +217,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/adBanner" />
+            app:layout_constraintTop_toBottomOf="@id/homeBannerViewPager" />
 
         <ImageView
             android:id="@+id/todayPodcast1"
@@ -400,12 +415,15 @@
             app:layout_constraintTop_toTopOf="@+id/youtubeIcon" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="(주)드림어스컴퍼니 사업자 정보"
-            app:layout_constraintTop_toBottomOf="@id/facebookIcon" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/facebookIcon"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

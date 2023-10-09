@@ -7,3 +7,5 @@ data class SongDataClass(
     val artist: String = "",
     val coverImageResource: Int = 0
 ) : Serializable
+
+

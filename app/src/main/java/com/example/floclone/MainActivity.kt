@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun startSongActivity() {
         val intent = Intent(this, SongActivity::class.java)
-
         startActivity(intent)
     }
 
