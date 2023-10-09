@@ -3,13 +3,14 @@ package com.example.floclone
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.example.floclone.databinding.ItemAlbumSongBinding
 
-class SongListAdapter:RecyclerView.Adapter<Holder>() {
-    val listData = mutableListOf<Song>()
+class SongListRecyclerViewAdapter:RecyclerView.Adapter<Holder>() {
+    var helper:RoomHelper? = null
+    val listData = mutableListOf<RoomSongEntity>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ItemAlbumSongBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
         return Holder(binding)
     }
 
@@ -24,9 +25,9 @@ class SongListAdapter:RecyclerView.Adapter<Holder>() {
 }
 
 class Holder(val binding: ItemAlbumSongBinding) : RecyclerView.ViewHolder(binding.root){
-    fun setSong(song:Song){
-        binding.albumSongIDTextView.text = song.TrackID.toString()
+    fun setSong(song:RoomSongEntity){
+        binding.albumSongIDTextView.text = song.id.toString()
         binding.songNameTextView.text = song.name
-        binding.artistNameTextView.text =
+        binding.artistNameTextView.text = song.Album
     }
 }

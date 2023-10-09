@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         binding.miniPlayerContainer.setOnClickListener {
             startSongActivity()
         }
-
     }
 
     private fun startSongActivity() {

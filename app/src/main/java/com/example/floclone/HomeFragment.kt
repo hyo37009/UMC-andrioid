@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.floclone.databinding.FragmentHomeBinding
 
@@ -65,7 +64,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun startSongFragment() {
-        val fragment:Fragment = SongFragment()
+        val fragment:Fragment = AlbumFragment()
         val transaction = (activity as MainActivity).supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frameLayout, fragment)
             .commit()
