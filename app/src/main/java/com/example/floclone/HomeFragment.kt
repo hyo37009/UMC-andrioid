@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
+import com.example.floclone.database.SongDataClass
 import com.example.floclone.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

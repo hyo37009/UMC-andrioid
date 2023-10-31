@@ -4,11 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.floclone.database.SongDataClass
 import com.example.floclone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    var nowSongDataClass:SongDataClass ?= null
+    var nowSongDataClass: SongDataClass?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -38,11 +39,6 @@ class MainActivity : AppCompatActivity() {
         nowSongDataClass = songDataClass
         binding.miniPlayerSongNameTextView.text = nowSongDataClass?.title
         binding.miniPlayerArtistNameTextView.text = nowSongDataClass?.artist
-    }
-
-    fun returnNowSong() : SongDataClass{
-        nowSongDataClass = this.nowSongDataClass ?: SongDataClass("null", "null", R.drawable.img_album_exp)
-        return nowSongDataClass as SongDataClass
     }
 
 

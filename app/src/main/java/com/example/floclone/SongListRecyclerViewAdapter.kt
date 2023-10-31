@@ -1,33 +1,37 @@
 package com.example.floclone
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
+import com.example.floclone.database.SongDatabase
+import com.example.floclone.database.SongViewModel
 import com.example.floclone.databinding.ItemAlbumSongBinding
 
-class SongListRecyclerViewAdapter:RecyclerView.Adapter<Holder>() {
-    var helper:RoomHelper? = null
-    val listData = mutableListOf<RoomSongEntity>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+class SongListRecyclerViewAdapter(private val songList: List<SongEntity>):RecyclerView.Adapter<SongListRecyclerViewAdapter.ViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemAlbumSongBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return Holder(binding)
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val currentItem = songList[position]
+        val nowId = currentItem.ID
+
+        holder.binding.albumSongIDTextView.text = nowId.toString()
+        holder.binding.songNameTextView.text = currentItem.name
+        holder.binding.artistNameTextView.text = currentItem.artist
+
+        if (nowId!!.toInt() == 1){
+            holder.binding.showTitleTextView.visibility = View.GONE
+        }
+
     }
 
     override fun getItemCount(): Int {
-        return listData.size
+        return songList.size
     }
 
-    override fun onBindViewHolder(holder: Holder, position: Int) {
-        val song = listData.get(position)
-        holder.setSong(song)
-    }
-}
-
-class Holder(val binding: ItemAlbumSongBinding) : RecyclerView.ViewHolder(binding.root){
-    fun setSong(song:RoomSongEntity){
-        binding.albumSongIDTextView.text = song.id.toString()
-        binding.songNameTextView.text = song.name
-        binding.artistNameTextView.text = song.Album
-    }
+    class ViewHolder(val binding:ItemAlbumSongBinding):RecyclerView.ViewHolder(binding.root)
 }
