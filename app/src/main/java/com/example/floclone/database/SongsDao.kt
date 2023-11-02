@@ -8,7 +8,7 @@ import androidx.room.Transaction
 interface AlbumDao{
     @Transaction
     @Query("select * from Album where (name = :albumName)")
-    fun getSongsByAlbum(albumName: String) : Array<SongEntity>
+    fun getAlbum(albumName: String) : AlbumEntity
 
     @Query("select * from Album")
     fun getAll():List<AlbumEntity>
@@ -21,7 +21,7 @@ interface SongDao{
     fun getAll(): List<SongEntity>
 
     @Query("select * from Song where albumName = :albumName")
-    fun getSongsByAlbumName(albumName:String)
+    fun getSongsByAlbumName(albumName:String) : List<SongEntity>
 
     @Query("SELECT artist FROM Album where (name = (SELECT name FROM Song where albumName = :songName))")
     fun getArtist(songName:String) : String

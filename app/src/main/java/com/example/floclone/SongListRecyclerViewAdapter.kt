@@ -8,7 +8,8 @@ import com.example.floclone.database.SongDatabase
 import com.example.floclone.database.SongViewModel
 import com.example.floclone.databinding.ItemAlbumSongBinding
 
-class SongListRecyclerViewAdapter(private val songList: List<SongEntity>):RecyclerView.Adapter<SongListRecyclerViewAdapter.ViewHolder>() {
+class SongListRecyclerViewAdapter():RecyclerView.Adapter<SongListRecyclerViewAdapter.ViewHolder>() {
+    private var songList = emptyList<SongEntity>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemAlbumSongBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -31,6 +32,11 @@ class SongListRecyclerViewAdapter(private val songList: List<SongEntity>):Recycl
 
     override fun getItemCount(): Int {
         return songList.size
+    }
+
+    fun setData(songList:List<SongEntity>){
+        this.songList = songList
+        notifyDataSetChanged()
     }
 
     class ViewHolder(val binding:ItemAlbumSongBinding):RecyclerView.ViewHolder(binding.root)

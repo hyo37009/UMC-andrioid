@@ -23,9 +23,9 @@ class SongViewModel (application: Application):AndroidViewModel(application) {
         readAllAlbumData = albumRepository.readAllData
     }
 
-    class Factory(val application: Application) : ViewModelProvider.Factory{
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return SongViewModel(application) as T
-        }
-    }
+//    class Factory(val application: Application) : ViewModelProvider.Factory{
+//        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+//            return SongViewModel(application) as T
+//        }
+//    }
 }

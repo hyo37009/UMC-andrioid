@@ -36,23 +36,23 @@ class HomeFragment : Fragment() {
 //
 //        var nowSongDataClass:SongDataClass = (activity as MainActivity).nowSongDataClass ?: asobo
 //
-//        binding.todayAlbumImage1.setOnClickListener {
+        binding.todayAlbumImage1.setOnClickListener {
 //            nowSongDataClass = asobo
 //            changeNowSongStatus(nowSongDataClass)
-//            startSongFragment()
-//        }
-//
-//        binding.todayAlbumImage2.setOnClickListener {
+            startSongFragment()
+        }
+
+        binding.todayAlbumImage2.setOnClickListener {
 //            nowSongDataClass = augustIsMyName
 //            changeNowSongStatus(nowSongDataClass)
-//            startSongFragment()
-//        }
-//
-//        binding.todayAlbumImage3.setOnClickListener {
+            startSongFragment()
+        }
+
+        binding.todayAlbumImage3.setOnClickListener {
 //            nowSongDataClass = yaritaikoto
 //            changeNowSongStatus(nowSongDataClass)
-//            startSongFragment()
-//        }
+            startSongFragment()
+        }
 
         val bannerAdapter = BannerViewPagerAdapter(this)
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))

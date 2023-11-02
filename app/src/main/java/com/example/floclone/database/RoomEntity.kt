@@ -11,29 +11,13 @@ import androidx.room.Relation
 import androidx.room.TypeConverter
 import java.io.ByteArrayOutputStream
 
-@Entity(tableName = "Album")
-data class AlbumEntity(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo
-    var ID: Long? = null,
-
-    @ColumnInfo
-    var name: String = "",
-
-    @ColumnInfo
-    var artist:String = "",
-
-    @ColumnInfo
-    var coverImage:Bitmap? = null,
-)
-
 @Entity(
     tableName = "Song",
     foreignKeys = [
         ForeignKey(
             entity = AlbumEntity::class,
-            parentColumns = arrayOf("artist"),
-            childColumns = arrayOf("artist"),
+            parentColumns = arrayOf("name"),
+            childColumns = arrayOf("albumName"),
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.CASCADE
         )
@@ -43,6 +27,7 @@ data class SongEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo
     var ID: Long? = null,
+
 
     @ColumnInfo
     var albumName: String = "",
@@ -55,6 +40,19 @@ data class SongEntity(
 
     @ColumnInfo
     var artist : String = ""
+)
+
+@Entity(tableName = "Album")
+data class AlbumEntity(
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo
+    var name: String = "",
+
+    @ColumnInfo
+    var artist:String = "",
+
+    @ColumnInfo
+    var coverImage:Bitmap? = null,
 )
 
 data class AlbumWithSongs(

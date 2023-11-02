@@ -11,6 +11,9 @@ import com.example.floclone.SongEntity
 
 class SongRepository(private val songDaO: SongDao) {
     val readAllData:List<SongEntity> = songDaO.getAll()
+    fun readAllSongsByAlbumName(albumName:String):List<SongEntity>{
+        return songDaO.getSongsByAlbumName(albumName)
+    }
 
     suspend fun readArtistName(song:SongEntity):String{
         return songDaO.getArtist(song.albumName)

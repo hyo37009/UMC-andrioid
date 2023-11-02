@@ -1,12 +1,14 @@
 package com.example.floclone
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.floclone.database.SongDatabase
 import com.example.floclone.databinding.FragmentAlbumBinding
+import kotlin.concurrent.thread
 
 
 class AlbumFragment() : Fragment() {
@@ -24,12 +26,29 @@ class AlbumFragment() : Fragment() {
     ): View? {
         binding = FragmentAlbumBinding.inflate(layoutInflater)
         database = SongDatabase.getInstance(activity as MainActivity)!!
-        val savedSongs = database.songDao().getAll()
+
+        var savedSongs = listOf<SongEntity>()
+//        savedSongs = database.songDao()?.getSongsByAlbumName("Bee and The Whales")!!
+//        val r = Runnable {
+//        }
+//        val thread = Thread(r)
+//        thread.start()
+        thread(start = true){
+            Log.d("db", database.songDao().getAll().toString())
+            savedSongs = database.songDao().getSongsByAlbumName("Bee and The Whales")
+            Log.d("savedSongs", savedSongs.toString())
+        }
+
+
         if(savedSongs.isNotEmpty()){
             songList.addAll(savedSongs)
         }
-        adapter = SongListRecyclerViewAdapter(songList)
+
+        Log.d("list", songList.toString())
+
+        adapter = SongListRecyclerViewAdapter()
         binding.songRecyclerView.adapter = adapter
+        adapter.setData(songList)
 
         binding.finishImageButton.setOnClickListener {
             startHomeFragment()
