@@ -1,6 +1,5 @@
 package com.example.floclone
 
-import android.database.sqlite.SQLiteOpenHelper
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
@@ -26,6 +25,10 @@ interface SongDao{
 
     @Query("SELECT artist FROM Album where (name = (SELECT name FROM Song where albumName = :songName))")
     fun getArtist(songName:String) : String
+
+    @Transaction
+    @Query("SELECT * FROM Song where albumName = :albumName")
+    fun getSongsWithAlbumByAlbumName(albumName:String): List<SongWithAlbum>
 
 }
 

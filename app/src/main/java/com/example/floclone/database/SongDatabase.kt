@@ -5,9 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.floclone.*
 
-@Database(entities = [SongEntity::class, AlbumEntity::class], version = 1)
+@Database(
+    version = 2,
+    entities = [SongEntity::class, AlbumEntity::class])
 @TypeConverters(bitmapByteArrayConverters::class)
 abstract class SongDatabase :RoomDatabase(){
     abstract fun songDao(): SongDao
@@ -19,6 +23,7 @@ abstract class SongDatabase :RoomDatabase(){
         fun getInstance(context: Context): SongDatabase?{
             return Room.databaseBuilder(context, SongDatabase::class.java, "song")
                 .createFromAsset("song.db")
+                .fallbackToDestructiveMigration()
                 .build()
         }
     }

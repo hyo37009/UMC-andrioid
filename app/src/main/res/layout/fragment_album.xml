@@ -27,6 +27,7 @@
         android:layout_marginBottom="10dp"
         android:text="title"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout" />
@@ -36,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
+        android:gravity="bottom"
         app:layout_constraintBottom_toTopOf="@+id/albumImageView"
         app:layout_constraintEnd_toEndOf="@+id/albumImageView"
         app:layout_constraintStart_toStartOf="@id/albumImageView">
@@ -57,10 +59,11 @@
 
     <ImageView
         android:id="@+id/albumImageView"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_marginBottom="100dp"
         android:src="@color/black"
+        app:layout_constraintVertical_bias="0.3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,11 +80,11 @@
         android:id="@+id/songRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/albumContentTabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/item_album_song"
         />
 
 

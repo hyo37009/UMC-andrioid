@@ -23,8 +23,9 @@ import java.io.ByteArrayOutputStream
     ]
 )
 data class SongEntity(
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo
-    var albumName: String? = "",
+    var ID: Long = 0,
 
     @ColumnInfo
     var trackId: Long? = 0,
@@ -32,10 +33,16 @@ data class SongEntity(
     @ColumnInfo
     var name: String? = "",
 
-
-    @PrimaryKey(autoGenerate = true)
     @ColumnInfo
-    var ID: Long = 0
+    @ForeignKey(
+        entity = AlbumEntity::class,
+        parentColumns = ["name"],
+        childColumns = ["albumName"]
+    )
+    var albumName: String? = ""
+
+
+
 )
 
 @Entity(tableName = "Album")
@@ -56,8 +63,17 @@ data class AlbumWithSongs(
     val album: AlbumEntity,
     @Relation(
         parentColumn = "name",
-        entityColumn = "album"
+        entityColumn = "albumName"
     )
     val songLists: List<SongEntity>
 )
 
+data class SongWithAlbum(
+    @Embedded
+    val song:SongEntity,
+    @Relation(
+        parentColumn = "albumName",
+        entityColumn = "name"
+    )
+    val album: AlbumEntity
+)
