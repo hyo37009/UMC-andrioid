@@ -16,7 +16,7 @@ class SongRepository(private val songDaO: SongDao) {
     }
 
     suspend fun readArtistName(song:SongEntity):String{
-        return songDaO.getArtist(song.albumName)
+        return songDaO.getArtist(song.albumName!!)
     }
 }
 

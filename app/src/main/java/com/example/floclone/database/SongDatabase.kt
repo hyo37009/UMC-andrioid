@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.example.floclone.*
 
@@ -18,16 +17,9 @@ abstract class SongDatabase :RoomDatabase(){
 
         @Synchronized
         fun getInstance(context: Context): SongDatabase?{
-            if (instance == null){
-                synchronized(SongDatabase::class){
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        SongDatabase::class.java,
-                        "song"
-                    ).build()
-                }
-            }
-            return instance
+            return Room.databaseBuilder(context, SongDatabase::class.java, "song")
+                .createFromAsset("song.db")
+                .build()
         }
     }
 

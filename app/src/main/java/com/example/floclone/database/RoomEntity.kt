@@ -2,6 +2,7 @@ package com.example.floclone
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
@@ -17,29 +18,24 @@ import java.io.ByteArrayOutputStream
         ForeignKey(
             entity = AlbumEntity::class,
             parentColumns = arrayOf("name"),
-            childColumns = arrayOf("albumName"),
-            onUpdate = ForeignKey.CASCADE,
-            onDelete = ForeignKey.CASCADE
+            childColumns = arrayOf("albumName")
         )
     ]
 )
 data class SongEntity(
+    @ColumnInfo
+    var albumName: String? = "",
+
+    @ColumnInfo
+    var trackId: Long? = 0,
+
+    @ColumnInfo
+    var name: String? = "",
+
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo
-    var ID: Long? = null,
-
-
-    @ColumnInfo
-    var albumName: String = "",
-
-    @ColumnInfo
-    var trackId: Long = 0,
-
-    @ColumnInfo
-    var name: String = "",
-
-    @ColumnInfo
-    var artist : String = ""
+    var ID: Long = 0
 )
 
 @Entity(tableName = "Album")
@@ -49,15 +45,15 @@ data class AlbumEntity(
     var name: String = "",
 
     @ColumnInfo
-    var artist:String = "",
+    var artist: String = "",
 
     @ColumnInfo
-    var coverImage:Bitmap? = null,
+    var coverImage: Bitmap? = null,
 )
 
 data class AlbumWithSongs(
     @Embedded
-    val album:AlbumEntity,
+    val album: AlbumEntity,
     @Relation(
         parentColumn = "name",
         entityColumn = "album"
