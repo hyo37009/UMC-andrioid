@@ -1,4 +1,4 @@
-package com.example.floclone
+package com.example.floclone.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

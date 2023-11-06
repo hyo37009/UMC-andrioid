@@ -1,4 +1,4 @@
-package com.example.floclone
+package com.example.floclone.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -8,19 +8,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.floclone.activity.MainActivity
+import com.example.floclone.R
+import com.example.floclone.SongWithAlbum
+import com.example.floclone.adapter.SongListRecyclerViewAdapter
 import com.example.floclone.database.SongDatabase
 import com.example.floclone.databinding.FragmentAlbumBinding
 import kotlin.concurrent.thread
 
 
-class AlbumFragment() : Fragment() {
+class AlbumFragment(private val nowSong:SongWithAlbum) : Fragment() {
     lateinit var mainActivity: MainActivity
     lateinit var binding: FragmentAlbumBinding
-    private lateinit var adapter:SongListRecyclerViewAdapter
+    private lateinit var adapter: SongListRecyclerViewAdapter
     lateinit var database: SongDatabase
-    lateinit var SongsWithAlbum: List<SongWithAlbum>
+    lateinit var albumSongs: List<SongWithAlbum>
     val TAG = "AlbumFragment"
-    val nowAlbumName = "Bee and The Whales"
+//    val nowAlbumName = "Bee and The Whales"
 
 
     override fun onCreateView(
@@ -30,28 +34,27 @@ class AlbumFragment() : Fragment() {
     ): View? {
         binding = FragmentAlbumBinding.inflate(layoutInflater)
         database = SongDatabase?.getInstance(mainActivity)!!
-        thread(start = true){
+        thread(start = true) {
             // 데이터 불러오려면 새로운 스레드를 열어야함.
             // 클릭한 앨범 정보를 받아 이에 맞는 db를 불러와야하는데 일단 임의로 고정해둠.
-            SongsWithAlbum = database.songDao().getSongsWithAlbumByAlbumName(nowAlbumName)
-            Log.d("dbAlbumSongs1", SongsWithAlbum.toString())
+            albumSongs = database.songDao().getSongsWithAlbumByAlbumName(nowSong.album.name)
+            Log.d(TAG, nowSong.toString())
         }
-        Thread.sleep(500)
-        Log.d("dbAlbumSongs2", SongsWithAlbum.toString())
+        Thread.sleep(300)
 
-
-        val adapter = SongListRecyclerViewAdapter(SongsWithAlbum)
+        adapter = SongListRecyclerViewAdapter(albumSongs)
 
         binding.songRecyclerView.adapter = adapter
         binding.songRecyclerView.layoutManager = LinearLayoutManager(this.activity)
 
+        val nowAlbum = nowSong.album
+
+        binding.songNameTextView.text = nowSong.song.name
+        binding.artistTextView.text = nowAlbum.artist
+        binding.albumImageView.setImageBitmap(nowAlbum.coverImage)
 
         binding.finishImageButton.setOnClickListener {
             startHomeFragment()
-        }
-
-        binding.songRecyclerView.setOnClickListener{
-            Log.d("songRecyclerView", "clicked")
         }
 
         return binding.root
@@ -59,27 +62,10 @@ class AlbumFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        var albumSongs = listOf<SongEntity>()
-//        thread(start = true){
-//            // 데이터 불러오려면 새로운 스레드를 열어야함.
-//            // 클릭한 앨범 정보를 받아 이에 맞는 db를 불러와야하는데 일단 임의로 고정해둠.
-//            Log.d("dbGetAll", database.songDao().getAll().toString())
-//            albumSongs = database.songDao().getSongsByAlbumName("Bee and The Whales")
-//            Log.d("dbAlbumSongs", albumSongs.toString())
-//        }
-//        Log.d("dbAlbumSongs2", albumSongs.toString())
-////
-//        adapter = SongListRecyclerViewAdapter(albumSongs)
-//        adapter.database = database
-//
-//        binding.songRecyclerView.adapter = adapter
-//        binding.songRecyclerView.layoutManager = LinearLayoutManager(this.activity)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         mainActivity = context as MainActivity
     }
 

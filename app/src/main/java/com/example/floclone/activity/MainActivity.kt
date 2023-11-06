@@ -1,15 +1,17 @@
-package com.example.floclone
+package com.example.floclone.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.floclone.database.SongDataClass
+import com.example.floclone.R
+import com.example.floclone.SongWithAlbum
 import com.example.floclone.databinding.ActivityMainBinding
+import com.example.floclone.fragment.HomeFragment
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
-    var nowSongDataClass: SongDataClass?= null
+    private lateinit var binding: ActivityMainBinding
+    private var nowSong: SongWithAlbum? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -35,10 +37,10 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    fun changeMiniPlayerInfo(songDataClass: SongDataClass) {
-        nowSongDataClass = songDataClass
-        binding.miniPlayerSongNameTextView.text = nowSongDataClass?.title
-        binding.miniPlayerArtistNameTextView.text = nowSongDataClass?.artist
+    fun changeMiniPlayerInfo(nowSong: SongWithAlbum) {
+        this.nowSong = nowSong
+        binding.miniPlayerSongNameTextView.text = nowSong.song.name
+        binding.miniPlayerArtistNameTextView.text = nowSong.album.artist
     }
 
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".fragment.HomeFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -90,98 +90,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mainImageView" />
 
-        <ImageView
-            android:id="@+id/today_album_image_1"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginStart="10dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/todayAlbumRecyclerView"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/img_album_exp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/todayReleaseTextView" />
-
-        <TextView
-            android:id="@+id/todayAlbumTitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:text="Bee and The Whales"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/today_album_image_1"
-            app:layout_constraintTop_toBottomOf="@+id/today_album_image_1" />
-
-        <TextView
-            android:id="@+id/todayAlbumArtist1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Galileo Galilei"
-            android:textSize="10sp"
-            app:layout_constraintStart_toStartOf="@+id/todayAlbumTitle1"
-            app:layout_constraintTop_toBottomOf="@+id/todayAlbumTitle1" />
-
-        <ImageView
-            android:id="@+id/today_album_image_2"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginStart="10dp"
-
-            android:src="@drawable/img_album_exp"
-            app:layout_constraintStart_toEndOf="@id/today_album_image_1"
-            app:layout_constraintTop_toTopOf="@id/today_album_image_1" />
-
-        <TextView
-            android:id="@+id/todayAlbumTitle2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:text="Bee and The Whales"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/today_album_image_2"
-            app:layout_constraintTop_toBottomOf="@+id/today_album_image_2" />
-
-        <TextView
-            android:id="@+id/todayAlbumArtist2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Galileo Galilei"
-            android:textSize="10sp"
-            app:layout_constraintStart_toStartOf="@+id/todayAlbumTitle2"
-            app:layout_constraintTop_toBottomOf="@+id/todayAlbumTitle2" />
-
-        <ImageView
-            android:id="@+id/today_album_image_3"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginStart="10dp"
-
-            android:src="@drawable/img_album_exp"
-            app:layout_constraintStart_toEndOf="@id/today_album_image_2"
-            app:layout_constraintTop_toTopOf="@id/today_album_image_2" />
-
-        <TextView
-            android:id="@+id/todayAlbumTitle3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:text="Bee and The Whales"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/today_album_image_3"
-            app:layout_constraintTop_toBottomOf="@+id/today_album_image_3" />
-
-        <TextView
-            android:id="@+id/todayAlbumArtist3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Galileo Galilei"
-            android:textSize="10sp"
-            app:layout_constraintStart_toStartOf="@+id/todayAlbumTitle3"
-            app:layout_constraintTop_toBottomOf="@+id/todayAlbumTitle3" />
+            app:layout_constraintTop_toBottomOf="@id/todayReleaseTextView"
+            tools:listitem="@layout/item_today_album"
+            />
 
         <!-- 여기는 광고 배너-->
 
@@ -201,9 +119,9 @@
             android:id="@+id/homeBannerViewPager"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/todayAlbumArtist1"
+            app:layout_constraintTop_toBottomOf="@+id/todayAlbumRecyclerView"
             tools:background="#A17171" />
 
         <TextView

@@ -1,4 +1,4 @@
-package com.example.floclone
+package com.example.floclone.activity
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
