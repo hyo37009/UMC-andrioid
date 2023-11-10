@@ -14,6 +14,7 @@ import com.example.floclone.SongWithAlbum
 import com.example.floclone.adapter.BannerViewPagerAdapter
 import com.example.floclone.adapter.TodaySongsAdapter
 import com.example.floclone.database.SongDatabase
+import com.example.floclone.database.SongWithAlbumDatabase
 import com.example.floclone.databinding.FragmentHomeBinding
 import kotlin.concurrent.thread
 
@@ -22,6 +23,7 @@ class HomeFragment : Fragment() {
     lateinit var todaySongs:List<SongWithAlbum>
     lateinit var mainActivity: MainActivity
     lateinit var nowSong:SongWithAlbum
+    lateinit var database: SongDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,11 +32,11 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+
         // 오늘의 노래 리사이클러뷰
         thread(start = true){
-            todaySongs = SongDatabase?.getInstance(mainActivity)!!
-                .songDao()
-                .getTodaySongs()
+            database = SongDatabase?.getInstance(mainActivity)!!
+
         }
         Thread.sleep(500)
         nowSong = todaySongs[0]

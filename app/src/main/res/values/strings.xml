@@ -4,7 +4,6 @@
     <string name="discover">둘러보기</string>
     <string name="search">검색</string>
     <string name="locker">보관함</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="MainVPSongCount">총 %1$d개</string>
 
 </resources>

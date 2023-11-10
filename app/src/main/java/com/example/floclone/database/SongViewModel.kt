@@ -1,31 +1,31 @@
 package com.example.floclone.database
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import android.content.Context
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.floclone.AlbumEntity
-import com.example.floclone.SongEntity
+import com.example.floclone.SongWithAlbum
+import com.example.floclone.adapter.MainImageViewPagerAdapter
 
-class SongViewModel (application: Application):AndroidViewModel(application) {
-    private val readAllSongData : List<SongEntity>
-    private val readAllAlbumData : List<AlbumEntity>
-    private val songRepository : SongRepository
-    private val albumRepository : AlbumRepository
+class SongViewModel() : ViewModel() {
 
-    init{
-        val songDao = SongDatabase.getInstance(application)!!.songDao()
-        songRepository = SongRepository(songDao)
-        readAllSongData = songRepository.readAllData
-
-        val albumDao = AlbumDatabase.getInstance(application)!!.albumDao()
-        albumRepository = AlbumRepository(albumDao)
-        readAllAlbumData = albumRepository.readAllData
+    fun getSongByName(context: Context, name: String): SongWithAlbum {
+        return SongDatabaseRepository.getSongByName(context, name)
     }
 
-//    class Factory(val application: Application) : ViewModelProvider.Factory{
-//        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-//            return SongViewModel(application) as T
-//        }
-//    }
+
+    fun getSongsByAlbumName(context: Context, name: String): List<SongWithAlbum> {
+        return SongDatabaseRepository.getSongsByAlbumName(context, name)
+    }
+
+    fun getSongById(context: Context, id: Int): SongWithAlbum {
+        return SongDatabaseRepository.getSongById(context, id)
+    }
+
+    class Factory() : ViewModelProvider.Factory{
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return SongViewModel() as T
+        }
+    }
 }

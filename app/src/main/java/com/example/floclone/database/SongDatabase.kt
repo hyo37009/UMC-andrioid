@@ -52,3 +52,21 @@ abstract class AlbumDatabase:RoomDatabase(){
         }
     }
 }
+
+@Database(entities = [AlbumEntity::class, SongEntity::class], version = 1)
+@TypeConverters(bitmapByteArrayConverters::class)
+abstract class SongWithAlbumDatabase:RoomDatabase(){
+    abstract fun songWithAlbumDao():SongWithAlbumDao
+
+    companion object{
+        private var instance : SongWithAlbumDatabase? = null
+
+        @Synchronized
+        fun getInstance(context:Context): SongWithAlbumDatabase?{
+            return Room.databaseBuilder(context, SongWithAlbumDatabase::class.java, "song")
+                .createFromAsset("song.db")
+                .fallbackToDestructiveMigration()
+                .build()
+        }
+    }
+}
